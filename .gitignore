@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 /DigiCertGlobalRootCA.crt.pem
+/encryption-keys.txt
