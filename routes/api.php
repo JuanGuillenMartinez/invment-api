@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\SubcategoryController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('v1/subcategories', SubcategoryController::class);
+
+Route::post('v1/users/register', [UserController::class, 'register']);
