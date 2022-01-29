@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\V1\SubcategoryRequest;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,11 @@ class SubcategoryController extends Controller
     public function index()
     {
         //
+        $subcategories = Subcategory::with('category')->get();
+        return response()->json(array(
+            'message' => 'Request succesfully processed', 
+            'data' => $subcategories
+        ));
     }
 
     /**
@@ -24,9 +30,16 @@ class SubcategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SubcategoryRequest $request)
     {
         //
+        $subcategory = new Subcategory();
+        $subcategory->id_category = $request->id_category;
+        $subcategory->name = $request->name;
+        $message = ($subcategory->save()) ? 'Subcategory saved successfully' : 'Error saving';
+        return response()->json(array(
+            'message' => $message
+        ), 500);
     }
 
     /**
