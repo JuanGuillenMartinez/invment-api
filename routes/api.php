@@ -23,3 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('v1/subcategories', SubcategoryController::class);
 
 Route::post('v1/users/register', [UserController::class, 'register']);
+
+Route::post('v1/users/login', [UserController::class, 'login']);
+
+Route::get('v1/users/show', [UserController::class, 'show'])->middleware('auth:sanctum');

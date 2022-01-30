@@ -8,6 +8,8 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class UserRequest extends FormRequest
 {
+    // Las clases de Request se utilizan para validar la data recibida por la api antes de ingresar al controlador
+
     /**
      * Get the validation rules that apply to the request.
      *
