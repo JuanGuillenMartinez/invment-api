@@ -18,7 +18,7 @@ class Controller extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendResponse($result, $message, $code = 200)
+    public function sendResponse($result, $message = 'Request successfully completed', $code = 200)
     {
     	$response = [
             'success' => true,
@@ -35,7 +35,7 @@ class Controller extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function sendError($error, $errorMessages = [], $code = 404)
+    public function sendError($error = 'An error occurred', $errorMessages = [], $code = 404)
     {
     	$response = [
             'success' => false,
