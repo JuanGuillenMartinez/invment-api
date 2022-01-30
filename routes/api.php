@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Api\V1\SubcategoryController;
-use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\CategoryController;
+use App\Http\Controllers\Api\V1\SubcategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,8 @@ Route::post('v1/users/login', [UserController::class, 'login']);
 
 
 Route::middleware('auth:sanctum')->group(function() {
-    Route::apiResource('v1/subcategories', SubcategoryController::class);
     Route::get('v1/users/show', [UserController::class, 'show']);
-    Route::apiResource('v1/categories', CategoryController::class);
+    Route::apiResource('v1/subcategories', SubcategoryController::class);
 });
 
+Route::apiResource('v1/categories', CategoryController::class);

@@ -22,8 +22,4 @@ class Category extends Model
         return $this->hasMany(Subcategory::class, 'id_category');
     }
 
-    protected static function newFactory()
-    {
-        return CategoryFactory::new();
-    }
 }

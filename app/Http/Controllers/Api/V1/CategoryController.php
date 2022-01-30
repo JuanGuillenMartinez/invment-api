@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -15,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = CategoryResource::collection(Category::all());
+        return ($categories) ? $this->sendResponse($categories, 'Datos obtenidos correctamente') : $this->sendError('Hubo un fallo');
     }
 
     /**
@@ -26,7 +29,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = array(
+            'name' => $request->name
+        );
+        $category = new Category($attributes);
+        return ($category->save()) ? $this->sendResponse($category, 'Registro guardado correctamente') : $this->sendError('Hubo un error'); 
     }
 
     /**
@@ -35,9 +42,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
+        $categoryResource = new CategoryResource(Category::find($id));
+        return $this->sendResponse($categoryResource, 'Datos obtenidos correctamente');
     }
 
     /**
@@ -47,9 +55,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->name;
+        return ($category->save()) ? $this->sendResponse($category, 'Correcto') : $this->sendError('Ocurrio un error');
     }
 
     /**
@@ -58,8 +68,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        return ($category->delete()) ? $this->sendResponse($category, 'Eliminado') : $this->sendError('Ocurrio un error');
     }
 }
