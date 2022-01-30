@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Traits\FailedValidationRequest;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Traits\FailedValidationRequest;
 
 class UserRequest extends FormRequest
 {
+    use FailedValidationRequest;
     // Las clases de Request se utilizan para validar la data recibida por la api antes de ingresar al controlador
 
     /**
@@ -20,8 +20,12 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:200',
-            'email' => 'required|string|max:70',
+            'email' => 'email|required|string|max:70',
             'password' => 'required|string|min:8'
         ];
+    }
+
+    public function failedValidation(Validator $validator) {
+        $this->failedValidationApi($validator);        
     }
 }
