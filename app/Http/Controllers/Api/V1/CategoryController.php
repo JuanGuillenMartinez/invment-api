@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = CategoryResource::collection(Category::all());
-        return ($categories) ? $this->sendResponse($categories, 'Datos obtenidos correctamente') : $this->sendError('Hubo un fallo');
+        return ($categories) ? $this->sendResponse($categories) : $this->sendError();
     }
 
     /**
@@ -27,13 +27,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
         $attributes = array(
             'name' => $request->name
         );
         $category = new Category($attributes);
-        return ($category->save()) ? $this->sendResponse($category, 'Registro guardado correctamente') : $this->sendError('Hubo un error'); 
+        return ($category->save()) ? $this->sendResponse($category) : $this->sendError();
     }
 
     /**
@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $categoryResource = new CategoryResource(Category::find($id));
-        return $this->sendResponse($categoryResource, 'Datos obtenidos correctamente');
+        return ($categoryResource) ? $this->sendResponse($categoryResource) : $this->sendError();
     }
 
     /**
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->name = $request->name;
-        return ($category->save()) ? $this->sendResponse($category, 'Correcto') : $this->sendError('Ocurrio un error');
+        return ($category->save()) ? $this->sendResponse($category) : $this->sendError();
     }
 
     /**
@@ -71,6 +71,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        return ($category->delete()) ? $this->sendResponse([], 'Eliminado correctamente') : $this->sendError('Ocurrio un error');
+        return ($category->delete()) ? $this->sendResponse([], 'Successfully deleted') : $this->sendError();
     }
 }
