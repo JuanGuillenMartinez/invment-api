@@ -29,6 +29,6 @@ Route::post('v1/users/login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function() {
     Route::get('v1/users/show', [UserController::class, 'show']);
     Route::apiResource('v1/subcategories', SubcategoryController::class);
+    Route::apiResource('v1/categories', CategoryController::class);
 });
 
-Route::apiResource('v1/categories', CategoryController::class);
