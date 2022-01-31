@@ -71,6 +71,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        return ($category->delete()) ? $this->sendResponse($category, 'Eliminado') : $this->sendError('Ocurrio un error');
+        return ($category->delete()) ? $this->sendResponse([], 'Eliminado correctamente') : $this->sendError('Ocurrio un error');
     }
 }
