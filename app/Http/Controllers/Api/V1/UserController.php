@@ -34,7 +34,7 @@ class UserController extends Controller
             );
             return $this->sendResponse($response, 'Usuario registrado correctamente');
         }
-        return $this->sendError('Datos incorrectos', array('error' => 'Hubo un error al registrar'));
+        return $this->sendError('Hubo un error al registrar');
     }
 
     /**
@@ -57,7 +57,7 @@ class UserController extends Controller
             );
             return $this->sendResponse($response, 'Logueado correctamente');
         }
-        return $this->sendError('Credenciales incorrectas', ['error' => 'Unauthorized']);
+        return $this->sendError('Credenciales incorrectas');
     }
 
     public function show(Request $request) {

@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = CategoryResource::collection(Category::all());
-        return ($categories) ? $this->sendResponse($categories) : $this->sendError();
+        return ($categories) ? $this->sendResponse($categories) : $this->sendError( 'Hubo un error al obtener los datos' );
     }
 
     /**
@@ -33,7 +33,7 @@ class CategoryController extends Controller
             'name' => $request->name
         );
         $category = new Category($attributes);
-        return ($category->save()) ? $this->sendResponse($category) : $this->sendError();
+        return ($category->save()) ? $this->sendResponse($category) : $this->sendError( 'Hubo un error al añadir el registro' );
     }
 
     /**
@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function show($id)
     {
         $categoryResource = new CategoryResource(Category::find($id));
-        return ($categoryResource) ? $this->sendResponse($categoryResource) : $this->sendError();
+        return ($categoryResource) ? $this->sendResponse($categoryResource) : $this->sendError( 'Hubo un error al mostrar el registro' );
     }
 
     /**
@@ -59,7 +59,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->name = $request->name;
-        return ($category->save()) ? $this->sendResponse($category) : $this->sendError();
+        return ($category->save()) ? $this->sendResponse($category) : $this->sendError( 'Hubo un error al actualizar el registro' );
     }
 
     /**
@@ -71,6 +71,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::find($id);
-        return ($category->delete()) ? $this->sendResponse([], 'Successfully deleted') : $this->sendError();
+        return ($category->delete()) ? $this->sendResponse([], 'Successfully deleted') : $this->sendError( 'Hubo un error al eliminar el registro' );
     }
 }
