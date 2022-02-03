@@ -60,6 +60,14 @@ class UserController extends Controller
         return $this->sendError('Credenciales incorrectas');
     }
 
+    public function logout(Request $request) {
+        if($request->user()->currentAccessToken()->delete()) {
+            return $this->sendResponse(['data' => 'Cerrado exitosamente']);
+        } else {
+            return $this->sendError('Ocurrió un error');
+        }
+    }
+
     public function show(Request $request) {
         return $request->user();
     }
