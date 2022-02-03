@@ -55,7 +55,7 @@ class UserController extends Controller
                 'token' => $authUser->createToken('auth')->plainTextToken,
                 'user' => $authUser
             );
-            return $this->sendResponse($response, 'Logueado correctamente');
+            return $this->sendResponse($response, 'Inicio de sesión correctamente');
         }
         return $this->sendError('Credenciales incorrectas');
     }
