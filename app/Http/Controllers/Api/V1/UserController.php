@@ -53,7 +53,7 @@ class UserController extends Controller
             $authUser = Auth::user();
             $response = array(
                 'token' => $authUser->createToken('auth')->plainTextToken,
-                'name' => $authUser->name
+                'user' => $authUser
             );
             return $this->sendResponse($response, 'Logueado correctamente');
         }
